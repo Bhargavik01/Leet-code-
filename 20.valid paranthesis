@@ -1,0 +1,38 @@
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+
+Example 1:
+Input: s = "()"
+Output: true
+
+Example 2:
+Input: s = "()[]{}"
+Output: true
+  -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- --------
+class Solution(object):
+    def isValid(self, s):
+       
+        pairs = {')':'(', '}':'{', ']':'['}
+        stack = []
+        for ele in s:
+            if ele in pairs:
+                top = stack.pop() if stack else '#'
+                if top != pairs[ele]:
+                    return False
+            else:
+                print("stack:" ,stack)
+                stack.append(ele)
+        return not stack
+  -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- --------
+⚡ Key Idea
+This is a stack (LIFO)  problem.
+
+Open bracket → push onto stack.
+Closing bracket → check if it matches the most recent opening bracket (stack top).
+
+If mismatch or stack empty → invalid.
+At the end, if stack is empty → valid.              
