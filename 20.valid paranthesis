@@ -35,4 +35,21 @@ Open bracket → push onto stack.
 Closing bracket → check if it matches the most recent opening bracket (stack top).
 
 If mismatch or stack empty → invalid.
-At the end, if stack is empty → valid.              
+At the end, if stack is empty → valid.  
+  -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -------- -----
+Other Simple way:
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        d = {"(": ")", "{":"}", "[":"]"}
+        for item in s:
+            if item in d: 
+                stack.append(item)
+            elif not stack: 
+                return False
+            else: 
+                last = stack.pop()
+                if item != d[last]:
+                    return False
+        return not stack   # cleaner
+
